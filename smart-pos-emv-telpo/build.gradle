@@ -61,8 +61,3 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
     implementation project(":smart-pos-core")
 }
-
-// maven-installer
-apply from: maven_installer
-// bintray
-apply from: bintray_installer

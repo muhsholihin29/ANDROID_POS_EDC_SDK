@@ -73,8 +73,3 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.1.0'
 }
 
-
-// maven-installer
-apply from: maven_installer
-// bintray
-apply from: bintray_installer

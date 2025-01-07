@@ -10,7 +10,7 @@ apply plugin: 'realm-android'
 
 apply plugin: 'realm-android'
 
-apply plugin: 'androidx.navigation.safeargs.kotlin'
+//apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 apply plugin: 'com.getkeepsafe.dexcount'
 
@@ -32,9 +32,9 @@ android {
 
         testInstrumentationRunner "com.interswitchng.smartpos.MockTestRunner"
         testInstrumentationRunnerArguments(shouldMock: 'true')
-        buildConfigField("String", "ISW_EMAIL_API_KEY", emailApiKey)
-        buildConfigField("String", "REALM_KEY", realmKey)
-        buildConfigField("String", "ISW_DEFAULT_PIN", defaultPin)
+        buildConfigField("String", "ISW_EMAIL_API_KEY", "\"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\"")
+        buildConfigField("String", "REALM_KEY", "\"35363764303735613930313632346137333133303733323835303436363337346537613436313431653335383763313738316232343661313334336531383830\"")
+        buildConfigField("String", "ISW_DEFAULT_PIN", "\"123456\"")
         buildConfigField("int", "ISW_TERMINAL_PORT", "5043")
         buildConfigField("String", "ISW_KIMONO_KEY_URL", "\"http://172.35.15.76:7075/kmw/kimonoservice\"")
 
@@ -165,7 +165,3 @@ dependencies {
     kaptAndroidTest "androidx.databinding:databinding-compiler:3.5.0"
 }
 
-// maven-installer
-apply from: maven_installer
-// bintray
-apply from: bintray_installer

@@ -55,9 +55,3 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
-
-
-// maven-installer
-apply from: maven_installer
-// bintray
-apply from: bintray_installer

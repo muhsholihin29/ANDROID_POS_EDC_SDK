@@ -9,7 +9,7 @@ android {
     compileSdkVersion targetSdk
     defaultConfig {
         applicationId "com.interswitchng.interswitchpossdkdemo"
-        minSdkVersion minSdk
+        minSdk 14
         targetSdkVersion targetSdk
         multiDexEnabled true
         versionCode 1
