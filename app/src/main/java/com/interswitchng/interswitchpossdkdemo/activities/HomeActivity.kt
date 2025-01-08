@@ -52,6 +52,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
             // show side menu on menu-click
             else drawerLayout.openDrawer(Gravity.LEFT)
         }
+
+//        instance.gotoTes()
     }
 
     override fun onStart() {

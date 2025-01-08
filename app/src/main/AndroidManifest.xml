@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.interswitchng.interswitchpossdkdemo">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:name=".POSApplication"
         android:allowBackup="true"
@@ -12,10 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".activities.CashBackActivity"
             android:label="@string/title_activity_cash_back"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.HomeActivity"
             android:label=""
@@ -39,7 +42,5 @@
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

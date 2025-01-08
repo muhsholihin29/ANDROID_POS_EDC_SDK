@@ -15,6 +15,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application>
+        <activity
+            android:name=".shared.activities.TestActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -60,14 +63,14 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/ISW.NoActionBar" />
-        <activity android:name=".modules.print.IswPrintActivity"
+        <activity
+            android:name=".modules.print.IswPrintActivity"
             android:label="Print"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/ISW.NoActionBar" />
-
-
-        <activity android:name=".shared.activities.TransactionDetailActivity"
+        <activity
+            android:name=".shared.activities.TransactionDetailActivity"
             android:label="Transaction Detail"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

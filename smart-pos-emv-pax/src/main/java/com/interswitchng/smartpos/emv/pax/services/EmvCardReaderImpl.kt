@@ -154,7 +154,7 @@ class EmvCardReaderImpl(context: Context) : EmvCardReader, PinCallback, IPed.IPe
 
         // try and detect card
         while (coroutineContext.isActive && !isCancelled) {
-            if (POSDeviceImpl.dal.icc.detect(0x00)) break
+            if (POSDeviceImpl.dal.icc.detect(0.toByte())) break
         }
 
         // notify callback of card detected

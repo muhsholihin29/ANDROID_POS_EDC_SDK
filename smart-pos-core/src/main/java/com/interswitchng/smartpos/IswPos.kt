@@ -14,6 +14,7 @@ import com.interswitchng.smartpos.modules.print.PrinterModule
 import com.interswitchng.smartpos.modules.transactions.IswPaymentActivity
 import com.interswitchng.smartpos.shared.IswConstants.KEY_BILL_INFO
 import com.interswitchng.smartpos.shared.IswConstants.KEY_PAYMENT_INFO
+import com.interswitchng.smartpos.shared.activities.TestActivity
 import com.interswitchng.smartpos.shared.errors.NotConfiguredException
 import com.interswitchng.smartpos.shared.interfaces.device.POSDevice
 import com.interswitchng.smartpos.shared.interfaces.device.POSFingerprint
@@ -197,7 +198,9 @@ class IswPos private constructor(private val app: Application, internal val devi
 
     fun gotoReports() = showScreen(ReportActivity::class.java)
 
-    fun gotoHistory() = showScreen(HistoryActivity::class.java)
+    fun gotoHistory() = showScreen(TestActivity::class.java)
+
+    fun gotoTes() = showScreen(TestActivity::class.java)
 
     companion object {
         // code used to start purchase request
