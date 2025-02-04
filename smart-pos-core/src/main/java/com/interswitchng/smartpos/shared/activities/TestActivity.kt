@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.isw_fragment_card_flow.pinHint
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
+
 internal class TestActivity : BaseMenuActivity() {
 
     val cardViewModel: CardFlowViewModel by viewModel()
@@ -68,6 +69,7 @@ internal class TestActivity : BaseMenuActivity() {
     private fun readCard() {
         cardViewModel.startTransaction { emvResult, emvData ->
             Log.d("mytag", emvData?.cardTrack2)
+            Log.d("mytag", emvData?.icc?.iccAsString)
         }
     }
 
@@ -104,7 +106,7 @@ internal class TestActivity : BaseMenuActivity() {
             is EmvMessage.CardRead -> {
 
                 cardType = message.cardType
-
+                logger.log("CArd Card")
 //                parent.onCardRead(message.cardPan)
 
                 // show account type selection

@@ -1,6 +1,7 @@
 package com.interswitchng.smartpos.emv.pax.emv
 
 import android.content.Context
+import android.util.Log
 import com.interswitchng.smartpos.emv.pax.models.getCapks
 import com.interswitchng.smartpos.emv.pax.utilities.EmvUtils
 import com.interswitchng.smartpos.emv.pax.utilities.EmvUtils.bcd2Str
@@ -48,6 +49,7 @@ internal class EmvImplementation(private val context: Context, private val pinCa
 
     fun setAmount(amount: Int) {
         this.amount = amount
+
     }
 
 
@@ -186,6 +188,8 @@ internal class EmvImplementation(private val context: Context, private val pinCa
 
         // show Input card info
         pinCallback.showInsertCard()
+
+        Log.d("mytag", "after showInsertCard")
 
 
         // trigger app selection by specifying card slot and transactionCount

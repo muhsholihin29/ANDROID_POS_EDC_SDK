@@ -2,6 +2,7 @@ package com.interswitchng.smartpos.emv.pax.services
 
 import android.content.Context
 import android.os.SystemClock
+import android.util.Log
 import com.interswitchng.smartpos.emv.pax.emv.*
 import com.interswitchng.smartpos.emv.pax.services.POSDeviceImpl.Companion.INDEX_TIK
 import com.interswitchng.smartpos.emv.pax.services.POSDeviceImpl.Companion.INDEX_TPK
@@ -21,6 +22,7 @@ import com.pax.dal.exceptions.EPedDevException
 import com.pax.dal.exceptions.PedDevException
 import com.pax.jemv.clcommon.ACType
 import com.pax.jemv.clcommon.RetCode
+import com.pax.neptunelite.api.NeptuneLiteUser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.sendBlocking
@@ -83,6 +85,10 @@ class EmvCardReaderImpl(context: Context) : EmvCardReader, PinCallback, IPed.IPe
             if (pan == null) callTransactionCancelled(EmvResult.EMV_ERR_NO_DATA.errCode, "Unable to read Card")
             // else notify card has been read
             else channel.send(EmvMessage.CardRead(emvImpl.getCardType(), pan))
+
+//            runBlocking {
+//                enterPin(true, 0, 0, pan ?: "")
+//            }
         }
     }
 
@@ -152,7 +158,7 @@ class EmvCardReaderImpl(context: Context) : EmvCardReader, PinCallback, IPed.IPe
         // notify callback
         channel.send(EmvMessage.InsertCard)
 
-        // try and detect card
+//         try and detect card
         while (coroutineContext.isActive && !isCancelled) {
             if (POSDeviceImpl.dal.icc.detect(0.toByte())) break
         }
@@ -172,12 +178,14 @@ class EmvCardReaderImpl(context: Context) : EmvCardReader, PinCallback, IPed.IPe
             // check if card cannot be detected
             if (!POSDeviceImpl.dal.icc.detect(0x00)) {
                 // notify callback of card removal
+                Log.d("mytag", "waiting card")
                 channel.send(EmvMessage.CardRemoved)
                 break
             }
 
             delay(500)
         }
+        Log.d("mytag", "showInsertCard")
     }
 
     override fun getPinResult(panBlock: String) = pinResult

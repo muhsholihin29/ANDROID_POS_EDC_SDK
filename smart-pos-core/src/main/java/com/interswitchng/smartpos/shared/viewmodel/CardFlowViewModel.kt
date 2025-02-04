@@ -2,6 +2,7 @@ package com.interswitchng.smartpos.shared.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.interswitchng.smartpos.shared.interfaces.device.POSDevice
 import com.interswitchng.smartpos.shared.models.core.TerminalInfo
 import com.interswitchng.smartpos.shared.models.transaction.cardpaycode.EmvMessage
@@ -11,10 +12,16 @@ import com.interswitchng.smartpos.shared.models.transaction.cardpaycode.response
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.interswitchng.smartpos.shared.utilities.Logger
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 
-internal class CardFlowViewModel(private val posDevice: POSDevice) : BaseViewModel() {
+class CardFlowViewModel(private val posDevice: POSDevice) : ViewModel() {
 
-
+    private val job = Job()
+    protected val uiScope = CoroutineScope(Dispatchers.Main + job)
+    protected val ioScope = uiScope.coroutineContext + Dispatchers.IO
     // communication channel with cardreader
     private val channel = Channel<EmvMessage>()
 
