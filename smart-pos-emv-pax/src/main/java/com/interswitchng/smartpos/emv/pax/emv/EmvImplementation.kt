@@ -246,6 +246,7 @@ internal class EmvImplementation(private val context: Context, private val pinCa
         logger.log("AC type - ${ac.type}")
 
         // start the transaction
+        Log.d("mytag", amount.toLong().toString())
         val startTransactionResult = EMVCallback.EMVStartTrans(amount.toLong(), 0, ac)
 
         logger.log("After EMVStartTransaction")
@@ -377,6 +378,7 @@ internal class EmvImplementation(private val context: Context, private val pinCa
 
                 // trigger enterPin
                 runBlocking {
+                    Log.d("mytag", "EmvCallbackListener emvGetHolderPwd")
                     enterPin(isOnline, tryFlag, remainCount, pan)
                 }
 

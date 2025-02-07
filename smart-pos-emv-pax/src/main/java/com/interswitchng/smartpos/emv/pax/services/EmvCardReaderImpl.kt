@@ -26,6 +26,7 @@ import com.pax.neptunelite.api.NeptuneLiteUser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.sendBlocking
+import kotlinx.coroutines.channels.trySendBlocking
 import kotlin.concurrent.thread
 import kotlin.coroutines.coroutineContext
 import com.interswitchng.smartpos.shared.models.transaction.cardpaycode.EmvResult as CoreEmvResult
@@ -197,7 +198,7 @@ class EmvCardReaderImpl(context: Context) : EmvCardReader, PinCallback, IPed.IPe
             // reset text
             text = ""
             // notify callback to show pin
-            channel.sendBlocking(EmvMessage.EnterPin)
+            channel.trySendBlocking(EmvMessage.EnterPin)
 
             // set check interval
             ped.setIntervalTime(1, 1)
@@ -206,7 +207,7 @@ class EmvCardReaderImpl(context: Context) : EmvCardReader, PinCallback, IPed.IPe
 
             // show pin input error
             if (triesCount > 0) {
-                channel.sendBlocking(EmvMessage.PinError(offlineTriesLeft))
+                channel.trySendBlocking(EmvMessage.PinError(offlineTriesLeft))
             } else {
 
                 // cancel pin input after specified Timeout
@@ -263,13 +264,13 @@ class EmvCardReaderImpl(context: Context) : EmvCardReader, PinCallback, IPed.IPe
             // add padding to get new pan
             val newPan = "0000$panShifted"
             // get pin block from the terminal using the terminal pin key
-            val pinBlock = ped.getPinBlock(INDEX_TPK, "4,6", newPan.toByteArray(), EPinBlockMode.ISO9564_0, emvImpl.timeout.toInt())
+            val pinBlock = ped.getDUKPTPin(INDEX_TIK, "4,5", panBlock.toByteArray(), EDUKPTPinMode.ISO9564_0_INC, emvImpl.timeout.toInt())
 
             // extract pin result
             if (pinBlock == null) pinResult = RetCode.EMV_NO_PASSWORD
             else {
                 pinResult = RetCode.EMV_OK
-                pinData = EmvUtils.bcd2Str(pinBlock)
+                pinData = EmvUtils.bcd2Str(pinBlock.result)
             }
         }
     }

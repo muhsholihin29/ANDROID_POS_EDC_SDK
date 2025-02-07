@@ -53,7 +53,7 @@ internal class TestActivity : BaseMenuActivity() {
         CURRENCYTYPE = IswLocal.INDONESIA.currency
         observeViewModel()
         // setup transaction
-        cardViewModel.setupTransaction(100, terminalInfo)
+        cardViewModel.setupTransaction(10, terminalInfo)
     }
 
     override fun onStart() {
@@ -67,10 +67,12 @@ internal class TestActivity : BaseMenuActivity() {
     }
 
     private fun readCard() {
-        cardViewModel.startTransaction { emvResult, emvData ->
-            Log.d("mytag", emvData?.cardTrack2)
-            Log.d("mytag", emvData?.icc?.iccAsString)
-        }
+        Handler().postDelayed({
+            cardViewModel.startTransaction { emvResult, emvData ->
+                Log.d("mytag", emvData?.cardTrack2)
+                Log.d("mytag", emvData?.icc?.iccAsString)
+            }
+        }, 10000)
     }
 
     private fun observeViewModel() {
